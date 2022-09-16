@@ -45,7 +45,7 @@ class RecipeService
     return [$name => 'no recipe with this name'];
   }
 
-  private function getOneRecipe(string $name): Recipes
+  private function getOneRecipe(string $name): ?Recipes
   {
     return $this->repository->findOneBy(['name' => $name]);
   }
@@ -69,7 +69,8 @@ class RecipeService
     $this->entityManager->flush();
     if ($recipe){
       return ['delete'=>'Successful'];
-    }
+    } else {
     return ['delete' => 'UN Successful'];
+    }
   }
 }

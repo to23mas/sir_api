@@ -64,6 +64,15 @@ class Ingredients
     $this->recipe = $recipe;
   }
 
+
+  /**
+   * @return Recipes
+   */
+  public function getRecepe(): Recipes
+  {
+    return $this->recipe;
+  }
+
   /**
    * @return int
    */
