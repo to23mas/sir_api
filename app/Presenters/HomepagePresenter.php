@@ -22,7 +22,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
     if ($request->isMethod('POST')) {
 //      $data = $request->getPost();
-      $data = $this->recipeService->getAll();
+      $data = $this->recipeService->getAll('jedna');
 
       $this->sendJson([$data]);
     }

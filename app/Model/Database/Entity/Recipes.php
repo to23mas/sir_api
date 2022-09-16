@@ -32,7 +32,7 @@ class Recipes {
   private string $preparation;
 
   /**
-   * @ORM\OneToMany(targetEntity="App\Model\Database\Entity\Ingredients", mappedBy="recipes")
+   * @ORM\OneToMany(targetEntity="App\Model\Database\Entity\Ingredients", mappedBy="recipe")
    */
   private Collection $ingredients;
 
@@ -113,7 +113,7 @@ class Recipes {
     return [
       'name' => $this->getName(),
       'preparation process' => $this->getPreparation(),
-      'ingredients' => $this->getIngredientsAsArray()
+      'ingredients' => $this->ingredients->getValues()
     ];
   }
 
