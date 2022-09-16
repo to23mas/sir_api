@@ -1,4 +1,5 @@
-parameters:
+services:
+    - App\Model\Database\RecipeService
 
 application:
 	errorPresenter: Error

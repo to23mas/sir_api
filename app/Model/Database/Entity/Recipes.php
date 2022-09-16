@@ -97,12 +97,25 @@ class Recipes {
     $this->ingredients[] = $ingredients;
   }
 
+
   /**
-   * @return Collection
+   * @return array
    */
-  public function getIngredients(): Collection
+  public function getIngredientsAsArray(): array
   {
-    return $this->ingredients;
+    return $this->ingredients->getValues();
   }
+  /**
+   * @return array
+   */
+  public function getArray(): array
+  {
+    return [
+      'name' => $this->getName(),
+      'preparation process' => $this->getPreparation(),
+      'ingredients' => $this->getIngredientsAsArray()
+    ];
+  }
+
 
 }
