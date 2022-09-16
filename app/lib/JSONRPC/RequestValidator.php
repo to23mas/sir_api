@@ -6,11 +6,8 @@ namespace App\lib\JSONRPC;
 
 class RequestValidator
 {
-
-
   private array $errors = [];
   private array $requestData;
-
 
   public function loadData(array $data): void
   {
@@ -26,17 +23,12 @@ class RequestValidator
 
     $this->lengthValidation('name', 255);
 
-
     if ($method === 'delete' || $method === 'get' || $method === 'getall' ){
       $this->validateOptions(['jsonrpc', 'method', 'name']);
     }else{ // only possibility at this point is CREATE
       $this->validateOptions(['jsonrpc', 'method', 'name', 'ingredients']);
       $this->lengthValidation('preparation', 5000);
     }
-
-
-
-
 
     return $this->errors;
 

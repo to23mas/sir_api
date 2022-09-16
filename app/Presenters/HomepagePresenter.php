@@ -19,7 +19,6 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
   public function actionDefault(): void
   {
-
   //  loading request
     $request = $this->getHttpRequest();
 
@@ -34,7 +33,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->sendJson([$errors]);
       }
       if ($data['method'] === 'getall'){
-        $data = $this->recipeService->getall();
+        $data = $this->recipeService->getAll();
 //        $this->sendJson([$data]);
       }else if ($data['method'] === 'get'){
         $data = $this->recipeService->get($data['name']);
@@ -44,11 +43,9 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $data = $this->recipeService->create($data);
       }
 
-
       $this->sendJson([$data]);
     }
   }
-
 
   public function renderDefault():void { $this->redirect('Homepage:BadMethod'); }
 

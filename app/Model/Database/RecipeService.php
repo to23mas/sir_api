@@ -19,8 +19,6 @@ class RecipeService
     $this->repository = $entityManagerDecorator->getRepository(Recipes::class);
   }
 
-
-
   public function create(array $data): array
   {
     $recipe = new Recipes($data['name'], $data['preparation']);

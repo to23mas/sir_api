@@ -2,8 +2,6 @@
 
 namespace App\Model\Database\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use Nettrine\ORM\Entity;
 /**
  * @ORM\Entity
@@ -49,13 +47,6 @@ class Ingredients
     return $this->ingr;
   }
 
-  /**
-   * @param string $ingr
-   */
-  public function setIngr(string $ingr): void
-  {
-    $this->ingr = $ingr;
-  }
 
   /**
    * @return string
@@ -72,6 +63,15 @@ class Ingredients
   {
     $this->recipe = $recipe;
   }
+
+  /**
+   * @return int
+   */
+  public function getId(): int
+  {
+    return $this->id;
+  }
+
 
 
 
