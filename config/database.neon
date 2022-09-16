@@ -1,0 +1,10 @@
+nettrine.dbal:
+    debug:
+        panel: %debugMode%
+        sourcePaths: [%appDir%]
+    connection:
+        host: localhost
+        driver: mysqli
+        dbname: cook_recipes
+        user:
+        password:
