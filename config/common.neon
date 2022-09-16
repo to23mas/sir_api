@@ -53,4 +53,4 @@ nettrine.migrations:
 
 includes:
     - database.neon
-    - vendor/phpstan/phpstan-nette/extension.neon
+
