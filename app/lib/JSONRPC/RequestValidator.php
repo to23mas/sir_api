@@ -19,7 +19,7 @@ class RequestValidator
     $method = $this->requestData['method'];
 //    FORMAT
     $this->validatePostBody('jsonrpc', ['2.0']);
-    $this->validatePostBody('method', ['create', 'get', 'getall', 'delete']);
+    $this->validatePostBody('method', ['recipe.create', 'recipe.get', 'recipe.getall', 'recipe.delete']);
 
     $this->lengthValidation('name', 255);
 
@@ -29,10 +29,9 @@ class RequestValidator
       $this->validateOptions(['jsonrpc', 'method', 'name', 'ingredients']);
       $this->lengthValidation('preparation', 5000);
     }
-
     return $this->errors;
-
   }
+
   private function validatePostBody(string $key, array $expectedValues){
     if (!array_key_exists($key, $this->requestData)) {
       $this->errors[] = ['missing declaration' => $key];
@@ -42,6 +41,7 @@ class RequestValidator
       }
     }
   }
+
   private function lengthValidation(string $key, int $length){
     if (!array_key_exists($key, $this->requestData)) {
       $this->errors[] = ['missing declaration' => $key];

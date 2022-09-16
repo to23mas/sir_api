@@ -32,12 +32,12 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
       if ($errors) {
         $this->sendJson([$errors]);
       }
-      if ($data['method'] === 'getall'){
+      if ($data['method'] === 'recipe.getall'){
         $data = $this->recipeService->getAll();
 //        $this->sendJson([$data]);
-      }else if ($data['method'] === 'get'){
+      }else if ($data['method'] === 'recipe.get'){
         $data = $this->recipeService->get($data['name']);
-      }else if ($data['method'] === 'delete'){
+      }else if ($data['method'] === 'recipe.delete'){
         $data = $this->recipeService->delete($data['name']);
       }else{
         $data = $this->recipeService->create($data);
