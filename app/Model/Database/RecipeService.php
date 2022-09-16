@@ -41,7 +41,10 @@ class RecipeService
   public function get(string $name)
   {
     $recipe = $this->repository->findOneBy(['name' => $name]);
-    return $recipe->getArray();
+    if ($recipe) {
+      return $recipe->getArray();
+    }
+    return [$name => 'no recipe with this name'];
   }
 
   private function getOneRecipe(string $name): Recipes

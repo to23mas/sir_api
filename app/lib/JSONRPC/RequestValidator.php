@@ -9,7 +9,6 @@ class RequestValidator
 
 
   private array $errors = [];
-  private array $validMethods = ['create', 'get', 'getall', 'delete'];
   private array $requestData;
 
 
@@ -20,35 +19,60 @@ class RequestValidator
 
   public function validate()
   {
+    $method = $this->requestData['method'];
 //    FORMAT
-    if (!array_key_exists('jsonrpc', $this->requestData)) {
-      $this->errors[] = 'you should use JSONRPC';
-    }
-//     METHOD
-    if (!array_key_exists('method', $this->requestData)) {
-      $this->errors[] = 'select valid method';
-    } else {
-      if (!in_array($this->requestData['method'], $this->validMethods)) {
-        $this->errors[] = 'Invalid method selected';
-      }
-    }
-// EMPTY
-    if ($this->errors) {
-      return $this->errors;
+    $this->validatePostBody('jsonrpc', ['2.0']);
+    $this->validatePostBody('method', ['create', 'get', 'getall', 'delete']);
+
+    $this->lengthValidation('name', 255);
+
+
+    if ($method === 'delete' || $method === 'get' || $method === 'getall' ){
+      $this->validateOptions(['jsonrpc', 'method', 'name']);
+    }else{ // only possibility at this point is CREATE
+      $this->validateOptions(['jsonrpc', 'method', 'name', 'ingredients']);
+      $this->lengthValidation('preparation', 5000);
     }
 
-    if ($this->requestData['method'] === 'get' || $this->requestData['method'] === 'delete') {
-      if (!array_key_exists('name', $this->requestData)) {
-        $this->errors[] = 'using get method should use "name"';
-      }
-    } else if ($this->requestData['method'] === 'getall') {
-      return $this->errors;
-    } else if ($this->requestData['method'] === 'create') {
-      return false;
-//      TODO
-    }
+
+
+
+
     return $this->errors;
 
   }
+  private function validatePostBody(string $key, array $expectedValues){
+    if (!array_key_exists($key, $this->requestData)) {
+      $this->errors[] = ['missing declaration' => $key];
+    }else{
+      if (! in_array($this->requestData[$key], $expectedValues)){
+        $this->errors[] = ['expected value for '. $key => $expectedValues];
+      }
+    }
+  }
+  private function lengthValidation(string $key, int $length){
+    if (!array_key_exists($key, $this->requestData)) {
+      $this->errors[] = ['missing declaration' => $key];
+    }else{
+      if (strlen($this->requestData[$key]) >= $length) {
+        $this->errors[] = ['max length of ' . $key => $length];
+      }else if (!$this->requestData[$key]){
+        $this->errors[] = [ $key => 'NULL/NONE is not allowed'];
+      }
+    }
+  }
 
+  private function validateOptions(array $expected){
+    $keys = array_keys($this->requestData);
+    foreach ($keys as $key){
+      if (! in_array($key, $expected)){
+        $this->errors[] = [ $key => 'not allowed option for chosen method'];
+      }
+    }
+    foreach ($expected as $expec){
+      if (! in_array($expec, $keys)){
+        $this->errors[] = [ $expec => 'this option is MANDATORY'];
+      }
+    }
+  }
 }
