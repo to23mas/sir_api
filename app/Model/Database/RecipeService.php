@@ -47,11 +47,15 @@ class RecipeService
     return $asArray;
   }
 
-  public function delete(string $name)
+  public function delete(string $name): array
   {
     $recipe = $this->getOneRecipe($name);
 
     $this->entityManager->remove($recipe);
     $this->entityManager->flush();
+    if ($recipe){
+      return ['delete'=>'Successful'];
+    }
+    return ['delete' => 'UN Successful'];
   }
 }

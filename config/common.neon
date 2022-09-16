@@ -1,6 +1,6 @@
 services:
     - App\Model\Database\RecipeService
-
+    - App\lib\JSONRPC\RequestValidator
 application:
 	errorPresenter: Error
 	mapping:
