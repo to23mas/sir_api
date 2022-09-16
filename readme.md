@@ -25,4 +25,3 @@ Užitečné odkazy:
 
 Použij jaké knihovny budeš chtít, minimálně nette/di by bylo fajn.
 Až budeš hotov, prosím, nasdílej nám odkaz na git repo.
-
