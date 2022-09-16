@@ -4,23 +4,16 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
-use JetBrains\PhpStorm\NoReturn;
+use App\Model\Database\RecipeService;
+
 use Nette;
 
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
 
-  public array $data = [
-    'ket' => 'value',
-    '1' => 1,
-    2 => 'hello',
-    'nested' => [
-      1 => 1,
-      2 => 2,
-      3 => [1,2,3,4,5,6,7,8,9]
-    ]
-  ];
+  /** @var RecipeService @inject */
+  public RecipeService $recipeService;
 
 
   public function actionDefault(): void
@@ -36,8 +29,8 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
   }
 
 
-  #[NoReturn] public function renderDefault():void { $this->redirect('Homepage:BadMethod'); }
+  public function renderDefault():void { $this->redirect('Homepage:BadMethod'); }
 
-  #[NoReturn] public function renderBadMethod() : void{}
+  public function renderBadMethod() : void{}
 
 }
