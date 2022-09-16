@@ -43,7 +43,7 @@ class RequestValidator
       }
     } else if ($this->requestData['method'] === 'getall') {
       return $this->errors;
-    } else if ($this->requestData['memthod'] === 'create') {
+    } else if ($this->requestData['method'] === 'create') {
       return false;
 //      TODO
     }

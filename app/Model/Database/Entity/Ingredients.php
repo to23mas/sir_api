@@ -65,6 +65,15 @@ class Ingredients
     return  $this->getIngr();
   }
 
+  /**
+   * @param Recipes $recipe
+   */
+  public function setRecipe(Recipes $recipe): void
+  {
+    $this->recipe = $recipe;
+  }
+
+
 
 
 

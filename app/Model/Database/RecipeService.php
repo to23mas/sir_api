@@ -2,6 +2,7 @@
 
 namespace App\Model\Database;
 
+use App\Model\Database\Entity\Ingredients;
 use App\Model\Database\Entity\Recipes;
 use Doctrine\ORM\EntityRepository;
 use Nettrine\ORM\EntityManagerDecorator;
@@ -20,9 +21,20 @@ class RecipeService
 
 
 
-  public function create(array $data) : void
+  public function create(array $data): array
   {
-    // TODO ****************************
+    $recipe = new Recipes($data['name'], $data['preparation']);
+    $this->entityManager->persist($recipe);
+    /* ingrediecees are loaded as array ... string to array */
+    $ingredientsArray = explode(',',trim($data['ingredients'], '[]/\\ '));
+    foreach ($ingredientsArray as $ingred) {
+      $ingredient = new Ingredients($ingred);
+      $ingredient->setRecipe($recipe);
+      $this->entityManager->persist($ingredient);
+    }
+    $this->entityManager->flush();
+
+    return ['created recepee' => 'Success', 'name' => $data['name']];
 
   }
 
@@ -32,7 +44,8 @@ class RecipeService
     return $recipe->getArray();
   }
 
-  private function getOneRecipe(string $name): Recipes{
+  private function getOneRecipe(string $name): Recipes
+  {
     return $this->repository->findOneBy(['name' => $name]);
   }
 

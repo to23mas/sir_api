@@ -40,6 +40,8 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $data = $this->recipeService->get($data['name']);
       }else if ($data['method'] === 'delete'){
         $data = $this->recipeService->delete($data['name']);
+      }else{
+        $data = $this->recipeService->create($data);
       }
 
 
