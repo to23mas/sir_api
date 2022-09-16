@@ -19,7 +19,11 @@
 		"nette/security": "^3.1",
 		"nette/utils": "^3.2",
 		"latte/latte": "^2.9",
-		"tracy/tracy": "^2.8"
+		"tracy/tracy": "^2.8",
+		"nettrine/orm": "^0.8.3",
+		"nettrine/dbal": "^0.8.0",
+		"nettrine/cache": "^0.3.0",
+		"contributte/console": "^0.9.2"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",
