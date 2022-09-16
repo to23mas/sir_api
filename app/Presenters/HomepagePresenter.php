@@ -21,7 +21,9 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
     $request = $this->getHttpRequest();
 
     if ($request->isMethod('POST')) {
-      $data = $request->getPost();
+//      $data = $request->getPost();
+      $data = $this->recipeService->getAll();
+
       $this->sendJson([$data]);
     }
   }

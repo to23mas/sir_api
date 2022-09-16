@@ -30,7 +30,7 @@ class Ingredients
    * @ORM\ManyToOne(targetEntity="App\Model\Database\Entity\Recipes", inversedBy="ingredients")
    * @ORM\JoinColumn(name="foreign_id", referencedColumnName="rec_id")
    */
-  private Recipes $recipes;
+  private Recipes $recipe;
 
 
   /**
