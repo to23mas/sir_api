@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use JetBrains\PhpStorm\NoReturn;
 use Nette;
 
 
@@ -24,8 +25,19 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
   public function actionDefault(): void
   {
-    $this->sendJson([$this->data]);
 
+  //  loading request
+    $request = $this->getHttpRequest();
+
+    if ($request->isMethod('POST')) {
+      $data = $request->getPost();
+      $this->sendJson([$data]);
+    }
   }
+
+
+  #[NoReturn] public function renderDefault():void { $this->redirect('Homepage:BadMethod'); }
+
+  #[NoReturn] public function renderBadMethod() : void{}
 
 }
