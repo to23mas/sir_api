@@ -57,6 +57,14 @@ class Ingredients
     $this->ingr = $ingr;
   }
 
+  /**
+   * @return string
+   */
+  public function __toString()  : string
+  {
+    return  $this->getIngr();
+  }
+
 
 
 

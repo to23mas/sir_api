@@ -110,10 +110,14 @@ class Recipes {
    */
   public function getArray(): array
   {
+    $arrayA = [];
+    foreach ($this->ingredients as $i){
+      $arrayA [] = $i->getIngr();
+    }
     return [
       'name' => $this->getName(),
       'preparation process' => $this->getPreparation(),
-      'ingredients' => $this->ingredients->getValues()
+      'ingredients' => $arrayA
     ];
   }
 
